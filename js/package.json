@@ -1,0 +1,22 @@
+{
+  "name": "emojify",
+  "version": "1.0.0",
+  "description": "emojification chrome extension",
+  "main": "content.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonh1/Emojify.git"
+  },
+  "author": "Wilson Ho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilsonh1/Emojify/issues"
+  },
+  "homepage": "https://github.com/wilsonh1/Emojify#readme",
+  "dependencies": {
+    "node-emoji": "^1.10.0"
+  }
+}

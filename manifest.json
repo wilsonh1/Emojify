@@ -1,0 +1,21 @@
+{
+    "name": "Emojify",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Emojify messages in Facebook Messenger",
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://www.messenger.com/*", "*://www.facebook.com/messages/*"],
+            "js": ["js/bundle.js"]
+        }
+    ],
+    "permissions": ["storage","activeTab","declarativeContent"]
+}
