@@ -2,7 +2,6 @@
 const emoji = require('node-emoji');
 
 function formatList (list, name) {
-    console.log(list);
     let s = name;
     let cnt = Math.floor(Math.random() * 5);
     while (cnt--) {
@@ -29,7 +28,7 @@ function onMissing (name) {
     if (lc)
         return formatList([lc.emoji], name);
 
-    if (name.length < 3)
+    if (name.length < 4)
         return name;
 
     let elist = emoji.search(name.toLowerCase());
@@ -50,14 +49,34 @@ function emojify () {
     }
 }
 
-function addListeners () {
-    emojify();
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message.command == 'init') {
+        emojify();
+
+        document.getElementsByClassName('uiScrollableAreaWrap')[2].onscroll = function() {
+            emojify();
+        };
+    } else {
+        window.location.reload(false);
+    }
+    sendResponse({result: "success"});
+});
+
+function uncheck () {
+    chrome.storage.sync.set({'emojify': false});
 }
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    if (message.command == 'init')
-        addListeners();
+window.onload = function () {
+    uncheck();
+}
+
+window.addEventListener('popstate', function (event) {
+	uncheck();
 });
+
+document.getElementsByClassName('uiScrollableAreaWrap')[0].onclick = function() {
+    uncheck();
+};
 
 },{"node-emoji":3}],2:[function(require,module,exports){
 (function (global){
